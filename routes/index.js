@@ -9,4 +9,5 @@ const shopController = require('../controllers/shop/')
 router.prefix(baseUrl)
 
 router.get('/', shopController.getshopItems, response)
+
 module.exports = router

@@ -4,6 +4,8 @@ const baseUrl = require('../config')
 const { response, getCode, checkLogin } = require('../middlewares/')
 const usersController = require('../controllers/user/')
 
+const { Encrypt, Decrypt } = require('../utils/crypto')
+
 router.prefix(baseUrl + '/users')
 
 router.post('/login', usersController.userLogin,response)

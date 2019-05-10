@@ -23,17 +23,17 @@ const status = {
     code: '204',
     msg: '用户不存在'
   },
-  // 'pwd error': {
-  //   code: '204',
-  //   msg: '密码'
-  // },
+  'fail login': {
+    code: '204',
+    msg: '登录失败'
+  },
   'code error': {
     code: '204',
     msg: '请填写正确的验证码'
   },
   'not login': {
     code: '103',
-    msg: '没有登陆'
+    msg: '没有登录'
   }
 }
 

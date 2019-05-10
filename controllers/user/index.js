@@ -24,18 +24,22 @@ const userReg = async (ctx,next) => {
   try {
     await UserModel.register(ctx.request.body)
     ctx.res.state = 'success'
-    await next()
   } catch (e) {
     ctx.res.state = 'error'
-    await next()
   }
+  await next()
 }
 
 const userLogin = async (ctx,next) => {
-  let mark = Decrypt(ctx.cookies.get('mark') ? ctx.cookies.get('mark') : '')
+  let mark
+  try {
+    mark = Decrypt(ctx.cookies.get('mark'))
+  } catch (e) {
+    ctx.res.state = 'fail login'
+    await next()
+  }
   let { user, pwd, code } = ctx.request.body
   let usernamedata = await UserModel.checkAlready({ username: user })
-
   let userdata = isNaN(user*1) ? 
     usernamedata 
     :

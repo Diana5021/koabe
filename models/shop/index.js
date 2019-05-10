@@ -20,9 +20,7 @@ const getshopItems = ({ name, type }) => {
     type: new RegExp(type, 'g')
   } : {}
   return Items.find(query).find(query2)
-          .then(res => ({
-            items: res
-          }))     
+          .then(res => (res))     
 }
 
 
