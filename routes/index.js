@@ -10,4 +10,11 @@ router.prefix(baseUrl)
 
 router.get('/', shopController.getshopItems, response)
 
+router.get('/item', shopController.getOneItem, response)
+
+
+router.post('/', shopController.setShopItem, response)
+
+
+
 module.exports = router
