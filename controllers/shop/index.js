@@ -1,6 +1,6 @@
 const shopModel = require('../../models/shop/')
 
-const getshopItems = async ( ctx, next ) => {
+const getShopItems = async ( ctx, next ) => {
   let {num, name, type} = ctx.request.query
   let pageNum = !!num ? ~~num : 1
   let pageSize = 2
@@ -97,7 +97,7 @@ const getOneItem = async (ctx, next) => {
 
 
 module.exports = {
-  getshopItems,
+  getShopItems,
   setShopItem,
   getOneItem
 }

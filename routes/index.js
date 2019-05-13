@@ -8,13 +8,11 @@ const shopController = require('../controllers/shop/')
 
 router.prefix(baseUrl)
 
-router.get('/', shopController.getshopItems, response)
+router.get('/', shopController.getShopItems, response)
 
 router.get('/item', shopController.getOneItem, response)
 
 
 router.post('/', shopController.setShopItem, response)
-
-
 
 module.exports = router
