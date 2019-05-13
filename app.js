@@ -20,6 +20,7 @@ onerror(app)
 // }))
 app.use(koaBody({
   multipart: true,  // 允许上传多个文件
+  jsonLimit: '2mb'
 }))
 app.use(json())
 app.use(logger())

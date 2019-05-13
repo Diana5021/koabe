@@ -1,10 +1,14 @@
+const path=require("path")
+const fs = require('fs')
 const svgCaptcha = require('svg-captcha')
 const jwt = require('jsonwebtoken')
 const { Encrypt, Decrypt } = require('../utils/crypto')
 const {status} = require('../utils/status')
+const uploadUrl="http://hocalhost:4000/static/upload"
 
 
 const response = async (ctx) => {
+  if (!ctx.res.state) ctx.res.state = 'error'
   await ctx.render('index', {
     data: JSON.stringify(ctx.res.responseData || {}), 
     status: status[ctx.res.state]
@@ -39,10 +43,6 @@ const checkLogin = async (ctx,next) => {
   if ( !token ) {
     ctx.res.state = 'not login'
     await next()
-    // await ctx.render('index', {
-    //   data: JSON.stringify({}), 
-    //   status: status['not login']
-    // })
     return 
   }
   try {
@@ -53,10 +53,6 @@ const checkLogin = async (ctx,next) => {
     if ( now > expires ) {
       ctx.res.state = 'not login'
       await next()
-      // await ctx.render('index', {
-      //   data: JSON.stringify({}), 
-      //   status: status['not login']
-      // })
       return
     }
     ctx.res.responseData = tokenInfo
@@ -66,15 +62,30 @@ const checkLogin = async (ctx,next) => {
   } catch (e) {
     ctx.res.state = 'not login'
     await next()
-    // await ctx.render('index', {
-    //   data: JSON.stringify({}), 
-    //   status: status['not login']
-    // })
   }
 
 }
+
+const uploadImg = async (ctx,next) => {
+  const file = ctx.request.files.file
+  const reader=fs.createReadStream(file.path)
+  let filePath=path.resolve(__dirname,"../static/upload/")
+  file.name = Date.now() + file.name
+  let fileResource=filePath+`/${file.name}`
+  if(!fs.existsSync(filePath)) {
+    fs.mkdirSync("./static/")
+    fs.mkdirSync("./static/upload/")
+  }
+  let upstream=fs.createWriteStream(fileResource)
+  reader.pipe(upstream)
+  ctx.res.responseData = { url:uploadUrl+`/${file.name}` }
+  ctx.res.state = 'success'
+  await next() 
+}
+
 module.exports = {
   response,
   getCode,
-  checkLogin
+  checkLogin,
+  uploadImg
 }
