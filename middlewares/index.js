@@ -4,7 +4,7 @@ const svgCaptcha = require('svg-captcha')
 const jwt = require('jsonwebtoken')
 const { Encrypt, Decrypt } = require('../utils/crypto')
 const {status} = require('../utils/status')
-const uploadUrl="http://hocalhost:4000/static/upload"
+const uploadUrl="http://10.9.67.216:4000/images"
 
 
 const response = async (ctx) => {
@@ -69,12 +69,12 @@ const checkLogin = async (ctx,next) => {
 const uploadImg = async (ctx,next) => {
   const file = ctx.request.files.file
   const reader=fs.createReadStream(file.path)
-  let filePath=path.resolve(__dirname,"../static/upload/")
+  let filePath=path.resolve(__dirname,"../public/images/")
   file.name = Date.now() + file.name
   let fileResource=filePath+`/${file.name}`
   if(!fs.existsSync(filePath)) {
-    fs.mkdirSync("./static/")
-    fs.mkdirSync("./static/upload/")
+    fs.mkdirSync("./public/")
+    fs.mkdirSync("./public/images/")
   }
   let upstream=fs.createWriteStream(fileResource)
   reader.pipe(upstream)
@@ -83,9 +83,21 @@ const uploadImg = async (ctx,next) => {
   await next() 
 }
 
+const deleteImg = async (ctx, next) => {
+  let { img } = ctx.request.query
+  try {
+    fs.unlinkSync(`./static/upload/${img}`)
+    ctx.res.state = 'success'
+  } catch (e) {
+    ctx.res.state = 'error'
+  }
+  await next()
+} 
+
 module.exports = {
   response,
   getCode,
   checkLogin,
-  uploadImg
+  uploadImg,
+  deleteImg
 }

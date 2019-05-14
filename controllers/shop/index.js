@@ -15,64 +15,9 @@ const getShopItems = async ( ctx, next ) => {
 }
 
 const setShopItem = async ( ctx, next ) => {
-  let data = [
-    {
-      carousel: [{
-        id: 1,
-        img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
-      }],
-      name: 'aaa',
-      info: 'aaa',
-      type: 'aaa',
-      price: 'aaa',
-      totalNum: 20
-    },
-    {
-      carousel: [{
-        id: 1,
-        img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
-      }],
-      name: 'aaa',
-      info: 'bbb',
-      type: 'bbb',
-      price: 'aaa',
-      totalNum: 20
-    },
-    {
-      carousel: [{
-        id: 1,
-        img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
-      }],
-      name: 'bbb',
-      info: 'bbb',
-      type: 'bbb',
-      price: 'bbb',
-      totalNum: 20
-    },
-    {
-      carousel: [{
-        id: 1,
-        img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
-      }],
-      name: 'ccc',
-      info: 'ccc',
-      type: 'ccc',
-      price: 'ccc',
-      totalNum: 20
-    },
-    {
-      carousel: [{
-        id: 1,
-        img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
-      }],
-      name: 'ddd',
-      info: 'ddd',
-      type: 'ddd',
-      price: 'ddd',
-      totalNum: 20
-    },
-
-  ]
+ 
+  let data = ctx.request.body
+  console.log(data)
 
   try {
     await shopModel.addShop(data)
@@ -101,3 +46,62 @@ module.exports = {
   setShopItem,
   getOneItem
 }
+
+
+// let data = [
+//   {
+//     carousel: [{
+//       id: 1,
+//       img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
+//     }],
+//     name: 'aaa',
+//     info: 'aaa',
+//     type: 'aaa',
+//     price: 'aaa',
+//     totalNum: 20
+//   },
+//   {
+//     carousel: [{
+//       id: 1,
+//       img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
+//     }],
+//     name: 'aaa',
+//     info: 'bbb',
+//     type: 'bbb',
+//     price: 'aaa',
+//     totalNum: 20
+//   },
+//   {
+//     carousel: [{
+//       id: 1,
+//       img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
+//     }],
+//     name: 'bbb',
+//     info: 'bbb',
+//     type: 'bbb',
+//     price: 'bbb',
+//     totalNum: 20
+//   },
+//   {
+//     carousel: [{
+//       id: 1,
+//       img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
+//     }],
+//     name: 'ccc',
+//     info: 'ccc',
+//     type: 'ccc',
+//     price: 'ccc',
+//     totalNum: 20
+//   },
+//   {
+//     carousel: [{
+//       id: 1,
+//       img: '//m.360buyimg.com/mobilecms/s843x843_jfs/t1/22294/10/8497/209988/5c76497dE847b1526/6c1feb97879b752c.jpg!q70.dpg.webp'
+//     }],
+//     name: 'ddd',
+//     info: 'ddd',
+//     type: 'ddd',
+//     price: 'ddd',
+//     totalNum: 20
+//   },
+// ]

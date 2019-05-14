@@ -4,10 +4,11 @@ mongoose.connect('mongodb://localhost:27017/Webshop',{ useNewUrlParser: true })
 const shopItemSchema = new mongoose.Schema({
   name: String,
   info: String,
-  type: String,
-  price: String,
-  carousel: Array,
-  totalNum: Number
+  type: Number,
+  price: Number,
+  image: Array,
+  number: Number,
+  time: Number
 })
 
 let Items = mongoose.model('shop',shopItemSchema)
@@ -34,7 +35,7 @@ const getshopItems =  async ({ name, type, pageNum, pageSize }) => {
 }
 
 const addShop = async (params) => {
-  await Items.deleteMany({})
+  // await Items.deleteMany({})
   return Items.insertMany(params)
 }
 
