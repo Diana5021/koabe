@@ -3,7 +3,7 @@ const shopModel = require('../../models/shop/')
 const getShopItems = async ( ctx, next ) => {
   let {num, name, type} = ctx.request.query
   let pageNum = !!num ? ~~num : 1
-  let pageSize = 2
+  let pageSize = 5
   let data = {pageNum,pageSize,name, type}
   try {
     ctx.res.responseData = await shopModel.getshopItems(data)
