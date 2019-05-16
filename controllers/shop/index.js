@@ -1,18 +1,20 @@
 const shopModel = require('../../models/shop/')
 
 const getShopItems = async ( ctx, next ) => {
-  let {num, name, type} = ctx.request.query
+  let {num, pageSize} = ctx.request.query
   let pageNum = !!num ? ~~num : 1
-  let pageSize = 5
-  let data = {pageNum,pageSize,name, type}
+  pageSize = !!pageSize ? ~~pageSize : 5
+  let data = {pageNum,pageSize}
   try {
     ctx.res.responseData = await shopModel.getshopItems(data)
+    
     ctx.res.state = 'success'
   } catch (e) {
     ctx.res.state = 'error'
   }
   await next()
 }
+
 
 const setShopItem = async ( ctx, next ) => {
  

@@ -13,19 +13,19 @@ const shopItemSchema = new mongoose.Schema({
 
 let Items = mongoose.model('shop',shopItemSchema)
 
-const getAll = async (name,type) => {
-  return Items.find(name).find(type)
+const getAll = async () => {
+  return Items.find()
 }
 
-const getshopItems =  async ({ name, type, pageNum, pageSize }) => {
-  let query = !!name ? {
-    name: new RegExp(name, 'g')
-  } : {}
-  let query2 = !!type ? {
-    type: new RegExp(type, 'g')
-  } : {}
-  let total = Math.ceil((await getAll(query,query2)).length / pageSize)
-  return Items.find(query).find(query2)
+const getshopItems =  async ({ pageNum, pageSize }) => {
+  // let query = !!name ? {
+  //   name: new RegExp(name, 'g')
+  // } : {}
+  // let query2 = !!type ? {
+  //   type: new RegExp(type, 'g')
+  // } : {}
+  let total = Math.ceil((await getAll()).length / pageSize)
+  return Items.find()
           .limit(pageSize)
           .skip((pageNum-1) * pageSize)
           .then(res => ({
