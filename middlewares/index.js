@@ -4,7 +4,7 @@ const svgCaptcha = require('svg-captcha')
 const jwt = require('jsonwebtoken')
 const { Encrypt, Decrypt } = require('../utils/crypto')
 const {status} = require('../utils/status')
-const uploadUrl="http://10.9.67.216:4000/images"
+const uploadUrl="http://10.246.108.34:4000/images"
 
 
 const response = async (ctx) => {
@@ -25,14 +25,16 @@ const getCode = async (ctx) => {
     background: 'rgba(0,0,0,0.8)'
   })
   let mark = Encrypt(captcha.text.toLowerCase())
-  ctx.cookies.set('mark',mark,{
-    domain: 'localhost',  // 写cookie所在的域名
-    path: '/',       // 写cookie所在的路径
-    maxAge: 10 * 60 * 1000, // cookie有效时长
-    // expires: new Date('2017-02-15'),  // cookie失效时间
-    httpOnly: false,  // 是否只用于http请求中获取
-    overwrite: true  // 是否允许重
-  })
+  console.log(mark, '')
+  // ctx.cookies.set('mark',mark,{
+  //   domain: 'localhost',  // 写cookie所在的域名
+  //   path: '/',       // 写cookie所在的路径
+  //   maxAge: 10 * 60 * 1000, // cookie有效时长
+  //   // expires: new Date('2017-02-15'),  // cookie失效时间
+  //   httpOnly: false,  // 是否只用于http请求中获取
+  //   overwrite: true  // 是否允许重
+  // })
+  ctx.cookies.set('mark',mark)
   ctx.body = JSON.stringify({
     img:captcha.data
   })

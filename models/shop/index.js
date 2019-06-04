@@ -2,13 +2,14 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/Webshop',{ useNewUrlParser: true })
 
 const shopItemSchema = new mongoose.Schema({
-  name: String,
-  info: String,
-  type: Number,
-  price: Number,
-  image: Array,
-  number: Number,
-  time: Number
+  GoodsName: String,
+  Picture: Array,
+  GoodsType: Number,
+  UnitPrice: Number,
+  SellNum: Number,
+  StoreNum: Number,
+  Description: String,
+  PublishTime: Number 
 })
 
 let Items = mongoose.model('shop',shopItemSchema)
@@ -18,12 +19,6 @@ const getAll = async () => {
 }
 
 const getshopItems =  async ({ pageNum, pageSize }) => {
-  // let query = !!name ? {
-  //   name: new RegExp(name, 'g')
-  // } : {}
-  // let query2 = !!type ? {
-  //   type: new RegExp(type, 'g')
-  // } : {}
   let total = Math.ceil((await getAll()).length / pageSize)
   return Items.find()
           .limit(pageSize)
@@ -35,7 +30,6 @@ const getshopItems =  async ({ pageNum, pageSize }) => {
 }
 
 const addShop = async (params) => {
-  // await Items.deleteMany({})
   return Items.insertMany(params)
 }
 
@@ -43,8 +37,20 @@ const getOne = (params) => {
   return Items.find({_id: params})
 }
 
+const getSortshop = (params) => {
+  let data
+  if(~~params === 10) {
+    data = {PublishTime:-1}
+  } else {
+    data = { SellNum: -1 }
+  }
+  
+  return Items.find().sort(data).limit(~~params)
+}
+
 module.exports = {
   getshopItems,
   addShop,
-  getOne
+  getOne,
+  getSortshop
 }

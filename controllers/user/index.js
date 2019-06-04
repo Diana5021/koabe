@@ -36,8 +36,16 @@ const userLogin = async (ctx,next) => {
     mark = Decrypt(ctx.cookies.get('mark'))
   } catch (e) {
     ctx.res.state = 'fail login'
+    // console.log('tag', '')
     await next()
+    return
   }
+  // let mark = Decrypt(ctx.cookies.get('mark'))
+  // if(!!mark) {
+  //   ctx.res.state = 'fail login'
+  //   await next()
+  //   return
+  // }
   let { user, pwd, code } = ctx.request.body
   let usernamedata = await UserModel.checkAlready({ username: user })
   let userdata = isNaN(user*1) ? 
