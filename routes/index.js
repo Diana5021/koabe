@@ -16,6 +16,9 @@ router.get('/item', shopController.getOneItem, response)
 
 router.get('/getsort', shopController.getSortItem, response)
 
+router.get('/getcateg', shopController.getCategItem, response)
+
+router.get('/getname', shopController.getKeyItem, response)
 
 router.post('/addshop', shopController.setShopItem, response)
 

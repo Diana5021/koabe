@@ -48,9 +48,20 @@ const getSortshop = (params) => {
   return Items.find().sort(data).limit(~~params)
 }
 
+const getCategshop = (params) => {
+  return Items.find({GoodsType: ~~params})
+}
+
+const getKeyshop = (params) => {
+  let query = { Description: new RegExp(params, 'g') }
+  return Items.find(query)
+}
+
 module.exports = {
   getshopItems,
   addShop,
   getOne,
-  getSortshop
+  getSortshop,
+  getCategshop,
+  getKeyshop
 }

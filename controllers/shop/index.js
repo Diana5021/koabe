@@ -49,12 +49,36 @@ const getOneItem = async (ctx, next) => {
 }
 
 
+const getCategItem = async ( ctx, next ) => {
+  let { categ } = ctx.request.query
+  try {
+    ctx.res.responseData = await shopModel.getCategshop(categ)
+    ctx.res.state = 'success'
+  } catch (e) {
+    ctx.res.state = 'error'
+  }
+  await next()
+}
+
+const getKeyItem = async ( ctx, next ) => {
+  let { key } = ctx.request.query
+  try {
+    ctx.res.responseData = await shopModel.getKeyshop(key)
+    ctx.res.state = 'success'
+  } catch (e) {
+    ctx.res.state = 'error'
+  }
+  await next()
+}
+
 
 module.exports = {
   getShopItems,
   setShopItem,
   getOneItem,
-  getSortItem
+  getSortItem,
+  getCategItem,
+  getKeyItem
 }
 
 // let data = [
