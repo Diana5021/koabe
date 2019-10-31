@@ -24,7 +24,7 @@
     "koa-router": "^7.1.1",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
-    "mongoose": "^5.5.4",
+    "mongoose": "^5.7.5",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
